@@ -2,180 +2,285 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>Tung Tung Arena Shop</title>
+  <title>Sklep Tung Tung Arena</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #020617, #020617);
       color: #fff;
       min-height: 100vh;
     }
+
     header {
-      padding: 50px 20px;
+      padding: 60px 20px;
       text-align: center;
+      background: radial-gradient(circle at top, #0f172a, #020617);
     }
     header h1 {
-      font-size: 3rem;
+      font-size: 3.2rem;
       margin: 0;
-      background: linear-gradient(90deg, #4ade80, #22d3ee);
+      background: linear-gradient(90deg, #22d3ee, #4ade80, #a78bfa);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: glow 3s infinite alternate;
+      animation: glow 4s infinite alternate;
     }
-    header p { color: #cbd5e1; }
+    header p { color: #94a3b8; }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px rgba(34,211,238,0.3); }
-      to { text-shadow: 0 0 25px rgba(74,222,128,0.7); }
+      from { text-shadow: 0 0 10px rgba(74,222,128,0.2); }
+      to { text-shadow: 0 0 30px rgba(167,139,250,0.6); }
     }
 
     .info {
-      max-width: 800px;
-      margin: 0 auto 40px;
+      max-width: 900px;
+      margin: -30px auto 60px;
       padding: 20px;
-      background: rgba(0,0,0,0.35);
-      border-radius: 16px;
+      background: rgba(15,23,42,0.8);
+      border-radius: 20px;
       text-align: center;
       backdrop-filter: blur(10px);
       color: #fde047;
     }
 
-    .container {
+    .section {
       max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .keys-title { color: #22d3ee; }
+    .ranks-title { color: #a78bfa; }
+
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
+      gap: 30px;
     }
 
     .card {
-      background: rgba(0,0,0,0.4);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: linear-gradient(180deg, #020617, #020617);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
     }
-    .card h2 { margin-top: 0; }
-    .price { font-size: 1.6rem; color: #4ade80; }
+
+    .card.key { border: 2px solid #22d3ee; }
+    .card.rank { border: 2px solid #a78bfa; }
+
+    .price {
+      font-size: 1.6rem;
+      margin: 10px 0 20px;
+      font-weight: 700;
+    }
+
+    .price.key { color: #22d3ee; }
+    .price.rank { color: #a78bfa; }
 
     .buy-btn {
-      margin-top: 15px;
       width: 100%;
-      padding: 14px;
-      border-radius: 14px;
+      padding: 16px;
+      border-radius: 16px;
       border: none;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1rem;
-      background: linear-gradient(90deg, #4ade80, #22d3ee);
-      color: #000;
+      color: #020617;
     }
-    .buy-btn:hover { filter: brightness(1.1); }
+
+    .buy-key { background: linear-gradient(90deg, #22d3ee, #38bdf8); }
+    .buy-rank { background: linear-gradient(90deg, #a78bfa, #f472b6); }
 
     footer {
       text-align: center;
-      padding: 30px;
-      color: #94a3b8;
+      padding: 40px;
+      color: #64748b;
     }
 
-    /* MODAL */
+    /* MODAL / CHECKOUT */
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(2,6,23,0.85);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 999;
     }
     .modal.active { display: flex; }
-    .modal-box {
+
+    .checkout {
       background: #020617;
       padding: 30px;
-      border-radius: 20px;
+      border-radius: 24px;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       animation: pop .25s ease;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
     }
+
     @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
+      from { transform: scale(0.85); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-    .modal-box h3 { margin-top: 0; }
-    .modal-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      background: #020617;
-      color: #fff;
-      border: 1px solid #334155;
-    }
-    .modal-box button {
+
+    .checkout h3 { margin-top: 0; }
+    .checkout input {
       width: 100%;
       padding: 14px;
+      margin: 12px 0;
       border-radius: 12px;
+      border: 1px solid #334155;
+      background: #020617;
+      color: #fff;
+    }
+
+    .terms {
+      display: flex;
+      gap: 10px;
+      font-size: .9rem;
+      color: #cbd5f5;
+      margin: 10px 0 20px;
+    }
+
+    .checkout button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
       border: none;
-      font-weight: 700;
+      font-weight: 800;
       background: linear-gradient(90deg, #4ade80, #22d3ee);
       cursor: pointer;
+      color: #020617;
     }
+
+    .success {
+      display: none;
+      text-align: center;
+      animation: pop .25s ease;
+    }
+
+    .success.active { display: block; }
+
+    .check {
+      font-size: 3rem;
+      color: #4ade80;
+      animation: check .6s ease;
+    }
+
+    @keyframes check {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Tung Tung Arena Shop</h1>
-  <p>Oficjalny sklep serwera Minecraft</p>
+  <h1>Tung Tung Arena Sklep</h1>
+  <p>Oficjalny sklep serwera Tung Tung Arena</p>
 </header>
 
 <div class="info">
-  💳 Płatność tylko <b>Paysafecard</b> • Rangi i klucze nadawane ręcznie przez administrację
+  💳 Płatność tylko <b> kodem Paysafecard</b> • Zamówienia realizowane ręcznie przez administrację
 </div>
 
-<div class="container">
-  <div class="card"><h2>Klucz GVIP</h2><div class="price">3 zł</div><button class="buy-btn" onclick="openModal('Klucz GVIP - 3zł')">Kup</button></div>
-  <div class="card"><h2>Klucz VIP</h2><div class="price">2 zł</div><button class="buy-btn" onclick="openModal('Klucz VIP - 2zł')">Kup</button></div>
-  <div class="card"><h2>Ranga GVIP</h2><div class="price">10 zł</div><button class="buy-btn" onclick="openModal('Ranga GVIP - 10zł')">Kup</button></div>
-  <div class="card"><h2>Ranga VIP</h2><div class="price">5 zł</div><button class="buy-btn" onclick="openModal('Ranga VIP - 5zł')">Kup</button></div>
-</div>
+<section class="section">
+  <div class="section-title keys-title">🔑 Klucze</div>
+  <div class="grid">
+    <div class="card key">
+      <h2>Klucz GVIP</h2>
+      <div class="price key">3 zł</div>
+      <button class="buy-btn buy-key" onclick="openCheckout('Klucz GVIP - 3zł')">Kup</button>
+    </div>
+    <div class="card key">
+      <h2>Klucz VIP</h2>
+      <div class="price key">2 zł</div>
+      <button class="buy-btn buy-key" onclick="openCheckout('Klucz VIP - 2zł')">Kup</button>
+    </div>
+  </div>
+</section>
 
-<footer>© 2025 Tung Tung Arena • minecraft energy only</footer>
+<section class="section">
+  <div class="section-title ranks-title">👑 Rangi</div>
+  <div class="grid">
+    <div class="card rank">
+      <h2>Ranga GVIP</h2>
+      <div class="price rank">10 zł</div>
+      <button class="buy-btn buy-rank" onclick="openCheckout('Ranga GVIP - 10zł')">Kup</button>
+    </div>
+    <div class="card rank">
+      <h2>Ranga VIP</h2>
+      <div class="price rank">5 zł</div>
+      <button class="buy-btn buy-rank" onclick="openCheckout('Ranga VIP - 5zł')">Kup</button>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Tung Tung Arena • kovemo</footer>
 
 <div class="modal" id="modal">
-  <div class="modal-box">
+  <div class="checkout" id="checkout">
     <h3 id="productName"></h3>
     <input id="nick" placeholder="Nick Minecraft" />
-    <input id="code" placeholder="Kod Paysafecard" />
-    <button onclick="sendOrder()">Wyślij zakup</button>
+    <input id="code" placeholder="Kod Paysafecard (16 cyfr)" />
+
+    <div class="terms">
+      <input type="checkbox" id="terms" />
+      <label for="terms">Akceptuję regulamin (brak zwrotów)</label>
+    </div>
+
+    <button onclick="submitOrder()">Finalizuj zakup</button>
+  </div>
+
+  <div class="checkout success" id="success">
+    <div class="check">✔</div>
+    <h3>Zamówienie wysłane</h3>
+    <p>Sprawdź maila i czekaj na rangę 😎</p>
   </div>
 </div>
 
 <script>
   let selectedProduct = '';
-  function openModal(product) {
+
+  function openCheckout(product) {
     selectedProduct = product;
     document.getElementById('productName').innerText = product;
     document.getElementById('modal').classList.add('active');
+    document.getElementById('checkout').style.display = 'block';
+    document.getElementById('success').classList.remove('active');
   }
-  function sendOrder() {
-    const nick = document.getElementById('nick').value;
-    const code = document.getElementById('code').value;
+
+  function submitOrder() {
+    const nick = document.getElementById('nick').value.trim();
+    const code = document.getElementById('code').value.trim();
+    const terms = document.getElementById('terms').checked;
+
     if (!nick || !code) return alert('Uzupełnij wszystkie pola');
+    if (!/^\d{16}$/.test(code)) return alert('Kod Paysafecard musi mieć dokładnie 16 cyfr');
+    if (!terms) return alert('Musisz zaakceptować regulamin');
 
     const subject = encodeURIComponent('Nowy zakup – Tung Tung Arena');
     const body = encodeURIComponent(`Produkt: ${selectedProduct}\nNick: ${nick}\nKod Paysafecard: ${code}`);
+
     window.location.href = `mailto:kleb258@gmail.com?subject=${subject}&body=${body}`;
-    document.getElementById('modal').classList.remove('active');
+
+    document.getElementById('checkout').style.display = 'none';
+    document.getElementById('success').classList.add('active');
   }
 </script>
 
