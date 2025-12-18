@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tung Tung Arena Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 30px;
+      text-align: center;
+      background: #111;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    header p {
+      color: #aaa;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1e1e1e;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h2 {
+      margin-top: 0;
+    }
+    .price {
+      font-size: 1.5rem;
+      color: #4ade80;
+      margin: 10px 0;
+    }
+    .buy-btn {
+      background: #4ade80;
+      color: #000;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .buy-btn:hover {
+      background: #22c55e;
+    }
+    .info {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      color: #facc15;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Tung Tung Arena Shop</h1>
+  <p>Oficjalny sklep serwera Minecraft</p>
+</header>
+
+<div class="info">
+  💳 Płatności przyjmowane <b>TYLKO</b> przez <b>Paysafecard</b><br />
+  Po zakupie rangę / klucz nadaje administracja ręcznie (no scam mf 😎)
+</div>
+
+<div class="container">
+  <div class="card">
+    <h2>Klucz GVIP</h2>
+    <div class="price">3 zł</div>
+    <button class="buy-btn" onclick="buy('Klucz GVIP - 3zł')">Kup</button>
+  </div>
+
+  <div class="card">
+    <h2>Klucz VIP</h2>
+    <div class="price">2 zł</div>
+    <button class="buy-btn" onclick="buy('Klucz VIP - 2zł')">Kup</button>
+  </div>
+
+  <div class="card">
+    <h2>Ranga GVIP</h2>
+    <div class="price">10 zł</div>
+    <button class="buy-btn" onclick="buy('Ranga GVIP - 10zł')">Kup</button>
+  </div>
+
+  <div class="card">
+    <h2>Ranga VIP</h2>
+    <div class="price">5 zł</div>
+    <button class="buy-btn" onclick="buy('Ranga VIP - 5zł')">Kup</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 Tung Tung Arena • made with chaos & minecraft vibes
+</footer>
+
+<script>
+  function buy(product) {
+    const nick = prompt('Podaj swój nick z Minecrafta:');
+    if (!nick) return;
+
+    const code = prompt('Wpisz kod Paysafecard:');
+    if (!code) return;
+
+    const subject = encodeURIComponent('Nowy zakup – Tung Tung Arena');
+    const body = encodeURIComponent(
+      'Produkt: ' + product + '\n' +
+      'Nick gracza: ' + nick + '\n' +
+      'Kod Paysafecard: ' + code
+    );
+
+    window.location.href = `mailto:kleb258@gmail.com?subject=${subject}&body=${body}`;
+  }
+</script>
+
+</body>
+</html>
